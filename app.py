@@ -24,7 +24,10 @@ def random_list():
     return r_list
 
 def draw(win, color, x, y, width, height):
-    return pygame.draw.rect(win, color, (x,y,width, height))
+    pygame.draw.rect(win, color, (x,y,width, height))
+    pygame.draw.line(win, BLACK, (x,y), (x,WIDTH),width=1)
+    pygame.draw.line(win, BLACK, (x,y), (x+width,y),width=1)
+    pygame.draw.line(win, BLACK, (x+width,y), (x+width,WIDTH),width=1)
 
 def bubble_sort(lst):
     for i in range(len(lst)-1):
@@ -50,14 +53,16 @@ def main():
         pygame.display.update()
         # time.sleep(3)
         for i in range(len(lst)-1):
+            draw(WIN, ORANGE, i*width, WIDTH-lst[i], width, lst[i])
+            pygame.display.update()
             for j in range(0,len(lst)-i-1):
-                draw(WIN, ORANGE, i*width, WIDTH-lst[i], width, lst[i])
+                
                 if lst[j] > lst[j+1]:
                     lst[j], lst[j+1] = lst[j+1], lst[j]
                     
-                    time.sleep(.1)
+                    time.sleep(.01)
                     # clock.tick(300)
-                    pygame.display.update()
+                    
 
         # new_lst = bubble_sort(lst)
         # for i in range(len(new_lst)):
